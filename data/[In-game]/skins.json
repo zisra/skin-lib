@@ -1,0 +1,20 @@
+{
+	"shown": [
+		"Holidays",
+		"Helicopter",
+		"Drone",
+		"Gyrocopter",
+		"UFO",
+		"Space",
+		"Jet",
+		"Beast",
+		"Blades",
+		"Mythical",
+		"Insects",
+		"Astrorace.io",
+		"Crystals",
+		"Premium",
+		"Elite"
+	],
+	"hidden": ["Creeper", "Star Wars", "Paper", "Other", "Deleted"]
+}
