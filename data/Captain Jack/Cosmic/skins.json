@@ -1,0 +1,11 @@
+{
+	"order": [
+		"CometRocket",
+		"BlackHole",
+		"Eclipse",
+		"StarDust",
+		"NorthShip",
+		"AsteroidShip",
+		"RocBird"
+	]
+}
