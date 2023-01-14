@@ -1,5 +1,5 @@
 {
-	"shown": [
+	"order": [
 		"Holidays",
 		"Helicopter",
 		"Drone",
@@ -14,7 +14,11 @@
 		"Astrorace.io",
 		"Crystals",
 		"Premium",
-		"Elite"
-	],
-	"hidden": ["Creeper", "Star Wars", "Paper", "Other", "Deleted"]
+		"Elite",
+		"Creeper",
+		"Star Wars",
+		"Paper",
+		"Other",
+		"Deleted"
+	]
 }
