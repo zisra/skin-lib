@@ -22,34 +22,33 @@ function getSkins() {
 		);
 
 		let singleSkins = [];
-		const singleSkinFiles = filterDotFiles(
-			fs.readdirSync(`./data/${creatorsFiles[creator]}/[Single]`)
-		);
 
-		if (singleSkinFiles.length) {
+		if (fs.existsSync(`./data/${creatorsFiles[creator]}/[Single]`)) {
+			const singleSkinFiles = filterDotFiles(
+				fs.readdirSync(`./data/${creatorsFiles[creator]}/[Single]`)
+			);
 			for (let singleSkin in singleSkinFiles) {
 				singleSkins.push({
 					name: singleSkinFiles[singleSkin],
 				});
 			}
+		}
+		for (let set in setFiles) {
+			let skins = [];
+			const skinFiles = JSON.parse(
+				fs.readFileSync(
+					`./data/${creatorsFiles[creator]}/${setFiles[set]}/skins.json`,
+					'utf8'
+				)
+			);
 
-			for (let set in setFiles) {
-				let skins = [];
-				const skinFiles = JSON.parse(
-					fs.readFileSync(
-						`./data/${creatorsFiles[creator]}/${setFiles[set]}/skins.json`,
-						'utf8'
-					)
-				);
-
-				skinFiles.order.forEach((skin) => {
-					skins.push({
-						name: skin,
-					});
+			skinFiles.order.forEach((skin) => {
+				skins.push({
+					name: skin,
 				});
+			});
 
-				sets.push({ name: setFiles[set], skins });
-			}
+			sets.push({ name: setFiles[set], skins });
 		}
 
 		creators.push({
