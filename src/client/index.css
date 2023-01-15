@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&family=Bebas%20Neue&display=swap');
+
+body {
+	background-color: #eee;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.lds-dual-ring {
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+}
+.lds-dual-ring:after {
+	content: ' ';
+	display: block;
+	width: 64px;
+	height: 64px;
+	margin: 8px;
+	border-radius: 50%;
+	border: 6px solid black;
+	border-color: black #0000;
+	animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.loader {
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.btn,
+.btn:visited {
+	text-align: center;
+	border: none;
+	background-color: #3d5dff;
+	color: white;
+	text-decoration: none;
+	border-radius: 8px;
+	padding: 8px;
+	transition: 0.2s;
+	cursor: pointer;
+}
+
+.btn:hover {
+	filter: brightness(120%);
+}
+
+.card {
+	text-align: center;
+	color: white;
+	background-color: #333;
+	padding: 20px;
+	margin-top: 5px;
+	margin-bottom: 20px;
+	border-radius: 10px;
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.invisible {
+	display: none;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.m-5 {
+	margin: 5px;
+}
+
+.card-title {
+	margin-top: 5px;
+	margin-bottom: 40px;
+}
+
+h1 {
+	font-family: 'Bebas Neue', sans-serif;
+	font-size: 50px;
+}
+
+.buttons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.skin-prize {
+	text-transform: capitalize;
+	margin-bottom: 15px;
+}
+
+.skin-card {
+	text-align: center;
+	color: white;
+	background-color: #333;
+	padding: 20px;
+	margin-top: 5px;
+	margin-bottom: 20px;
+	border-radius: 10px;
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 20px;
+}
+
+h2 {
+	margin: 5px;
+	font-size: 36px;
+	margin-bottom: 10px;
+}
+
+p {
+	margin: 2px;
+	margin-top: 16px;
+	margin-bottom: 8px;
+}
+
+.inline-img {
+	height: 20px;
+	margin-bottom: -3px;
+}
+
+.highlight {
+	border: solid #ff9c4c 5px;
+}

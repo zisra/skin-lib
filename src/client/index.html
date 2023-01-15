@@ -3,10 +3,44 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Defly.io skins</title>
+		<title>Defly SkinLib</title>
 	</head>
-	<body>
-		<h1>Welcome to Snowpack!</h1>
+	<body data-set-preferred-mode-onload="true">
+		<div class="container loader">
+			<h1 class="text-center">Defly SkinLib</h1>
+			<div class="lds-dual-ring"></div>
+
+			<p>Browse all of defly.io's skins and custom skins</p>
+		</div>
+		<div class="container invisible" id="root">
+			<h1 class="text-center">Defly SkinLib</h1>
+			<div class="card">
+				<h2 class="card-title">Skin creators</h2>
+				<div class="text-center buttons" id="skin-creators">
+					<!-- Skin creators -->
+				</div>
+			</div>
+			<div class="card">
+				<h2 class="card-title">In-game skins</h2>
+				<div class="text-center buttons" id="ingame-skin-sets">
+					<!-- In-game skin sets -->
+				</div>
+			</div>
+			<div class="card">
+				<h2 class="card-title">Hidden skins</h2>
+				<div class="text-center buttons" id="hidden-skin-sets">
+					<!-- In-game skin sets -->
+				</div>
+			</div>
+		</div>
+
+		<div class="container invisible" id="ingame-skin-set">
+			<h1 class="text-center" id="ingame-skin-set-title"><!-- Title -->></h1>
+			<div id="ingame-skins">
+				
+			</div>
+		</div>
+
 		<script src="index.js" type="module"></script>
 	</body>
 </html>

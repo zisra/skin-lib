@@ -1,5 +1,14 @@
 {
 	"order": [71, 79, 96, 97, 98, 99, 136, 137],
-	"prices": ["elite", "elite", "elite", "elite", "elite", "elite", "elite"],
+	"prices": [
+		"elite",
+		"elite",
+		"elite",
+		"elite",
+		"elite",
+		"elite",
+		"elite",
+		"elite"
+	],
 	"inGame": true
 }

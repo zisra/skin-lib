@@ -30,10 +30,6 @@ function getSkins() {
 			for (let singleSkin in singleSkinFiles) {
 				singleSkins.push({
 					name: singleSkinFiles[singleSkin],
-					data: fs.readFileSync(
-						`./data/${creatorsFiles[creator]}/[Single]/${singleSkinFiles[singleSkin]}`,
-						'utf8'
-					),
 				});
 			}
 
@@ -49,10 +45,6 @@ function getSkins() {
 				skinFiles.order.forEach((skin) => {
 					skins.push({
 						name: skin,
-						data: fs.readFileSync(
-							`./data/${creatorsFiles[creator]}/${setFiles[set]}/${skin}.txt`,
-							'utf8'
-						),
 					});
 				});
 
@@ -79,17 +71,15 @@ function getSkins() {
 		inGameSkinFiles.order.forEach((skin) => {
 			inGameSkins.push({
 				name: skin,
+				isFinal: inGameSkinFiles.final === skin,
 				price: inGameSkinFiles.prices[inGameSkinFiles.order.indexOf(skin)],
-				data: fs.readFileSync(
-					`./data/[In-game]/${category}/skin${skin}.txt`,
-					'utf8'
-				),
 			});
 		});
 
 		inGame.push({
 			name: category,
 			skins: inGameSkins,
+			inGame: inGameSkinFiles.inGame,
 		});
 	});
 
@@ -102,6 +92,38 @@ function getSkins() {
 app.get('/skins', (req, res) => {
 	res.json(getSkins());
 });
+
+app.get('/skin/custom/:creator/:set/:name', (req, res) => {
+	res.sendFile(
+		`./data/${req.params.creator}/${req.params.set}/${req.params.name}.txt`,
+		{
+			root: process.cwd(),
+		}
+	);
+});
+
+app.get('/skin/inGame/:set/:name', (req, res) => {
+	res.sendFile(
+		`./data/[In-game]/${req.params.set}/skin${req.params.name}.txt`,
+		{
+			root: process.cwd(),
+		}
+	);
+});
+
+app.get('/skin/custom/:creator/:name', (req, res) => {
+	res.sendFile(
+		`./data/${creatorsFiles[req.params.creator]}/[Single]/${
+			singleSkinFiles[req.params.name]
+		}.txt`,
+		{
+			root: process.cwd(),
+		}
+	);
+});
+
+app.use(express.static('./dist'));
+app.use(express.static('./src/static'));
 
 app.listen(process.env.PORT || 3000, () => {
 	console.log('Server listening');

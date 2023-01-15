@@ -2,7 +2,8 @@
 	"name": "skin-repo",
 	"version": "1.0.0",
 	"description": "Custom and current defly.io skins",
-	"main": "src/index.js",
+	"source": "src/index.js",
+	"browserslist": "> 5%, last 2 versions, not dead",
 	"type": "module",
 	"scripts": {
 		"start": "node src/index.js",
