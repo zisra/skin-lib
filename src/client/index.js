@@ -47,21 +47,21 @@ window.onload = async () => {
 			skinCreators.innerHTML = skins.custom
 				.map(
 					(creator) =>
-						`<a class="btn m-5" role="button" href="#creator/${creator.name}">${creator.name}</a>`
+						`<a class="btn btn-block" role="button" href="#creator/${creator.name}">${creator.name}</a>`
 				)
 				.join('');
 			inGameSkinSets.innerHTML = skins.inGame
 				.filter((set) => set.inGame)
 				.map(
 					(set) =>
-						`<a class="btn m-5" href="#inGameSkinSet/${set.name}" role="button" >${set.name}</a>`
+						`<a class="btn btn-block" href="#inGameSkinSet/${set.name}" role="button" >${set.name}</a>`
 				)
 				.join('');
 			hiddenSkinSets.innerHTML = skins.inGame
 				.filter((set) => !set.inGame)
 				.map(
 					(set) =>
-						`<a class="btn m-5" href="#inGameSkinSet/${set.name}" role="button" >${set.name}</a>`
+						`<a class="btn btn-block" href="#inGameSkinSet/${set.name}" role="button" >${set.name}</a>`
 				)
 				.join('');
 		},

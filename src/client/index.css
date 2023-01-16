@@ -137,6 +137,7 @@ p {
 	border: solid #ff9c4c 5px;
 }
 
-.mt {
+.btn-block {
 	margin-top: 15px;
+	display: block;
 }
