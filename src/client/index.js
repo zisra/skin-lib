@@ -1,4 +1,15 @@
-import './index.css';
+window.showImages = async (path) => {
+	const modal = document.querySelector('#modal');
+	const data = await fetch(`skin/${path}`);
+	const skin = await data.json();
+
+	modal.innerHTML = skin.images.map(img=>`<img class="skin-image" src="${img}"></img`);
+	modal.showModal();
+};
+
+window.closeImages = (path) => {
+	document.querySelector('#modal').close();
+};
 
 window.onload = async () => {
 	const pages = {
@@ -29,50 +40,54 @@ window.onload = async () => {
 				!isNaN(skin.price)
 					? `<p class="skin-prize">Price: ${skin.price} <img class="inline-img" src="img/coin.png" /></p>`
 					: `<p class="skin-prize">Price: ${skin.price}</p>`
-			}<a class="btn" href="skin/${skin.path}" download="skin-${
+			}<a class="btn btn-block" href="skin/${skin.path}" download="skin${
 				skin.name
-			}.txt">Download</a></div>`;
+			}.txt">Download</a><button onclick="showImages('${
+				skin.path
+			}')" class="btn btn-image btn-block">Images</button></div>`;
 		},
 		customSkinElement: (skin) => {
 			return `<div class="skin-card ${skin.isFinal ? 'highlight' : ''}"><h2>${
 				skin.name
-			}</h2><a class="btn mt" href="skin/${skin.path}" download="skin-${
+			}</h2><a class="btn btn-block" href="skin/${skin.path}" download="${
 				skin.name
-			}.txt">Download</a></div>`;
+			}.txt">Download</a><button onclick="showImages('${
+				skin.path
+			}')" class="btn btn-image btn-block">Images</button></div>`;
+		},
+		inGameSkinSetButton: (set) => {
+			return `<a class="btn m-5" href="#inGameSkinSet/${set.name}" role="button" >${set.name}</a>`;
+		},
+		creatorButton: (creator) => {
+			return `<a class="btn m-5" role="button" href="#creator/${creator.name}">${creator.name}</a>`;
+		},
+		customSetTitle: (state) => {
+			return `<a class="link" href="#creator/${state[1]}">${state[1]}</a> - ${state[2]}`;
+		},
+		customSet: (skin, state) => {
+			return `<a class="btn m-5" role="button" href="#customSet/${state[1]}/${skin.name}">${skin.name}</a>`;
 		},
 	};
 
 	const states = {
 		root: () => {
 			skinCreators.innerHTML = skins.custom
-				.map(
-					(creator) =>
-						`<a class="btn btn-block" role="button" href="#creator/${creator.name}">${creator.name}</a>`
-				)
+				.map((creator) => builders.creatorButton(creator))
 				.join('');
 			inGameSkinSets.innerHTML = skins.inGame
 				.filter((set) => set.inGame)
-				.map(
-					(set) =>
-						`<a class="btn btn-block" href="#inGameSkinSet/${set.name}" role="button" >${set.name}</a>`
-				)
+				.map((set) => builders.inGameSkinSetButton(set))
 				.join('');
 			hiddenSkinSets.innerHTML = skins.inGame
 				.filter((set) => !set.inGame)
-				.map(
-					(set) =>
-						`<a class="btn btn-block" href="#inGameSkinSet/${set.name}" role="button" >${set.name}</a>`
-				)
+				.map((set) => builders.inGameSkinSetButton(set))
 				.join('');
 		},
 		creator: (state) => {
 			customCreatorTitle.textContent = state[1];
 			customSets.innerHTML = skins.custom
 				.find((creator) => creator.name == state[1])
-				.skinSets.map(
-					(set) =>
-						`<a class="btn m-5" role="button" href="#customSet/${state[1]}/${set.name}">${set.name}</a>`
-				)
+				.skinSets.map((skin) => builders.customSet(skin, state))
 				.join('');
 		},
 		inGameSkinSet: (state) => {
@@ -88,7 +103,7 @@ window.onload = async () => {
 				.join('');
 		},
 		customSet: (state) => {
-			customSetTitle.textContent = `${state[1]}: ${state[2]}`;
+			customSetTitle.innerHTML = builders.customSetTitle(state);
 			customSetSkins.innerHTML = skins.custom
 				.find((creator) => creator.name == state[1])
 				.skinSets.find((set) => set.name == state[2])
