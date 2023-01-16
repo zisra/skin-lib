@@ -166,5 +166,26 @@ p {
 }
 
 .skin-image {
-	
+	width: 128px;
+	border: solid 2px black;
+	background-color: #f2f7ff;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.close-button {
+	cursor: pointer;
+	border: none;
+	margin: 4px;
+	padding: 4px;
+	border-radius: 2px;
+	margin-bottom: 10px;
+}
+
+.close-button::after {
+	content: 'Close';
+}
+
+.align-right {
+	text-align: right;
 }

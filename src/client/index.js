@@ -1,9 +1,17 @@
 window.showImages = async (path) => {
 	const modal = document.querySelector('#modal');
+	const modalContent = document.querySelector('#modal-content');
+
 	const data = await fetch(`skin/${path}`);
 	const skin = await data.json();
+	let skinImages = [];
 
-	modal.innerHTML = skin.images.map(img=>`<img class="skin-image" src="${img}"></img`);
+	for (let image in skin.images) {
+		skinImages.push(
+			`<img title="${image}" alt="${image}" class="skin-image" src="${skin.images[image]}" />`
+		);
+	}
+	modalContent.innerHTML = skinImages.join('');
 	modal.showModal();
 };
 
