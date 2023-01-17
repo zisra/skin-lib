@@ -28,6 +28,7 @@ window.onload = async () => {
 	};
 
 	const skinCreators = document.querySelector('#skin-creators');
+	const singleSkins = document.querySelector('#single-skins');
 	const inGameSkinSets = document.querySelector('#ingame-skin-sets');
 	const hiddenSkinSets = document.querySelector('#hidden-skin-sets');
 	const inGameSkinSetTitle = document.querySelector('#ingame-skin-set-title');
@@ -93,10 +94,34 @@ window.onload = async () => {
 		},
 		creator: (state) => {
 			customCreatorTitle.textContent = state[1];
-			customSets.innerHTML = skins.custom
-				.find((creator) => creator.name == state[1])
-				.skinSets.map((skin) => builders.customSet(skin, state))
-				.join('');
+			if (
+				skins.custom.find((creator) => creator.name == state[1]).skinSets.length
+			) {
+				customSets.innerHTML =
+					'<div class="card buttons">' +
+					skins.custom
+						.find((creator) => creator.name == state[1])
+						.skinSets.map((skin) => builders.customSet(skin, state))
+						.join('') +
+					'</div>';
+			} else {
+				customSets.innerHTML = '';
+			}
+			if (
+				skins.custom.find((creator) => creator.name == state[1]).singleSkins
+					.length
+			) {
+				singleSkins.innerHTML = skins.custom
+					.find((creator) => creator.name == state[1])
+					.singleSkins.map((skin) =>
+						builders.customSkinElement({
+							...skin,
+							path: `custom/${state[1]}/${skin.name}`,
+						})
+					);
+			} else {
+				singleSkins.innerHTML = '';
+			}
 		},
 		inGameSkinSet: (state) => {
 			inGameSkinSetTitle.textContent = state[1];

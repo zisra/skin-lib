@@ -61,7 +61,8 @@
 
 		<div class="container invisible" id="custom-creator">
 			<h1 class="text-center" id="custom-creator-title"><!-- Title -->></h1>
-			<div class="card buttons" id="custom-sets"></div>
+			<div id="custom-sets"></div>
+			<div id="single-skins"></div>
 		</div>
 
 		<div class="container invisible" id="custom-set">
@@ -71,11 +72,11 @@
 			</div>
 		</div>
 
-		<dialog class="modal" id="modal">
-			<div class="align-right">
-				<button class="close-button" onclick="closeImages()"></button>
+		<dialog onclick="this.close()" class="modal" id="modal">
+			<div onclick="event.stopPropagation()">
+				<div class="align-right"><button class="close-button" onclick="closeImages()"></button></div>
+				<div id="modal-content"></div>
 			</div>
-			<div id="modal-content"></div>
 		</dialog>
 
 		<script src="index.js" type="module"></script>

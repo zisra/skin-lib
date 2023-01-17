@@ -29,7 +29,7 @@ function getSkins() {
 			);
 			for (let singleSkin in singleSkinFiles) {
 				singleSkins.push({
-					name: singleSkinFiles[singleSkin],
+					name: singleSkinFiles[singleSkin].replace('.txt', ''),
 				});
 			}
 		}
@@ -112,9 +112,7 @@ app.get('/skin/inGame/:set/:name', (req, res) => {
 
 app.get('/skin/custom/:creator/:name', (req, res) => {
 	res.sendFile(
-		`./data/${creatorsFiles[req.params.creator]}/[Single]/${
-			singleSkinFiles[req.params.name]
-		}.txt`,
+		`./data/${req.params.creator}/[Single]/${req.params.name}.txt`,
 		{
 			root: process.cwd(),
 		}
