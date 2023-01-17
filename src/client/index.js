@@ -8,7 +8,7 @@ window.showImages = async (path) => {
 
 	for (let image in skin.images) {
 		skinImages.push(
-			`<img title="${image}" alt="${image}" class="skin-image" src="${skin.images[image]}" />`
+			`<a href="${skin.images[image]}" download="${image}"><img title="${image}" alt="${image}" class="skin-image" src="${skin.images[image]}" /></a>`
 		);
 	}
 	modalContent.innerHTML = skinImages.join('');
@@ -137,9 +137,18 @@ window.onload = async () => {
 			states.root(currentState);
 			pages.root.classList.remove('invisible');
 		} else if (states[currentState[0]]) {
-			states[currentState[0]](currentState);
-			pages[currentState[0]].classList.remove('invisible');
-		} else return;
+			try {
+				states[currentState[0]](currentState);
+				pages[currentState[0]].classList.remove('invisible');
+			} catch (err) {
+				console.error(err);
+				states.root(currentState);
+				pages.root.classList.remove('invisible');
+			}
+		} else {
+			states.root(currentState);
+			pages.root.classList.remove('invisible');
+		}
 	}
 
 	checkState();
