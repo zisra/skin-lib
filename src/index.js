@@ -8,6 +8,7 @@ function filterDotFiles(array) {
 }
 
 function getSkins() {
+	let totalSkins = 0;
 	let creators = [];
 	let creatorsFiles = filterDotFiles(
 		fs.readdirSync('./data').filter((dir) => dir !== '[In-game]')
@@ -31,6 +32,7 @@ function getSkins() {
 				singleSkins.push({
 					name: singleSkinFiles[singleSkin].replace('.txt', ''),
 				});
+				totalSkins++;
 			}
 		}
 		for (let set in setFiles) {
@@ -46,6 +48,7 @@ function getSkins() {
 				skins.push({
 					name: skin,
 				});
+				totalSkins++;
 			});
 
 			sets.push({ name: setFiles[set], skins });
@@ -73,6 +76,7 @@ function getSkins() {
 				isFinal: inGameSkinFiles.final === skin,
 				price: inGameSkinFiles.prices[inGameSkinFiles.order.indexOf(skin)],
 			});
+			totalSkins++;
 		});
 
 		inGame.push({
@@ -83,6 +87,7 @@ function getSkins() {
 	});
 
 	return {
+		totalSkins,
 		custom: creators,
 		inGame,
 	};
@@ -93,8 +98,9 @@ app.get('/skins', (req, res) => {
 });
 
 app.get('/skin/custom/:creator/:set/:name', (req, res) => {
-	res.sendFile(
+	res.download(
 		`./data/${req.params.creator}/${req.params.set}/${req.params.name}.txt`,
+		`skin${req.params.name}`,
 		{
 			root: process.cwd(),
 		}
@@ -102,8 +108,9 @@ app.get('/skin/custom/:creator/:set/:name', (req, res) => {
 });
 
 app.get('/skin/inGame/:set/:name', (req, res) => {
-	res.sendFile(
+	res.download(
 		`./data/[In-game]/${req.params.set}/skin${req.params.name}.txt`,
+		req.params.name,
 		{
 			root: process.cwd(),
 		}
@@ -111,8 +118,9 @@ app.get('/skin/inGame/:set/:name', (req, res) => {
 });
 
 app.get('/skin/custom/:creator/:name', (req, res) => {
-	res.sendFile(
+	res.download(
 		`./data/${req.params.creator}/[Single]/${req.params.name}.txt`,
+		req.params.name,
 		{
 			root: process.cwd(),
 		}
