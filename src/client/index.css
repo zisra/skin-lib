@@ -81,6 +81,12 @@ body {
 	margin: 5px;
 }
 
+.btn-large {
+	margin-top: 35px;
+	margin-bottom: 20px;
+	font-size: 20px;
+}
+
 .card-title {
 	margin-top: 5px;
 	margin-bottom: 20px;

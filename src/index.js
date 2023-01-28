@@ -1,7 +1,24 @@
-import express from 'express';
 import fs from 'node:fs';
 
+import express from 'express';
+import archiver from 'archiver';
+
 const app = express();
+
+function zipDirectory(sourceDir, outPath) {
+	const archive = archiver('zip', { zlib: { level: 9 } });
+	const stream = fs.createWriteStream(outPath);
+
+	return new Promise((resolve, reject) => {
+		archive
+			.directory(sourceDir, false)
+			.on('error', (err) => reject(err))
+			.pipe(stream);
+
+		stream.on('close', () => resolve());
+		archive.finalize();
+	});
+}
 
 function filterDotFiles(array) {
 	return array.filter((str) => !str.startsWith('.'));
@@ -93,6 +110,12 @@ function getSkins() {
 	};
 }
 
+app.get('/allSkinsZip', (req, res) => {
+	res.sendFile('skins.zip', {
+		root: process.cwd(),
+	});
+});
+
 app.get('/skins', (req, res) => {
 	res.json(getSkins());
 });
@@ -133,3 +156,7 @@ app.use(express.static('./src/static'));
 app.listen(process.env.PORT || 3000, () => {
 	console.log('Server listening');
 });
+
+console.log('Starting to ZIP files');
+await zipDirectory('./data', './skins.zip');
+console.log('File ZIP completed');
