@@ -37,6 +37,7 @@ window.onload = async () => {
 	const customSets = document.querySelector('#custom-sets');
 	const customSetTitle = document.querySelector('#custom-set-title');
 	const customSetSkins = document.querySelector('#custom-set-skins');
+	const downloadButton = document.querySelector('#download-button');
 
 	const data = await fetch('/skins');
 	const skins = await data.json();
@@ -91,6 +92,7 @@ window.onload = async () => {
 				.filter((set) => !set.inGame)
 				.map((set) => builders.inGameSkinSetButton(set))
 				.join('');
+			downloadButton.innerHTML = `Download all ${skins.totalSkins} skins (ZIP)`;
 		},
 		creator: (state) => {
 			customCreatorTitle.textContent = state[1];
@@ -151,6 +153,7 @@ window.onload = async () => {
 	};
 
 	function checkState() {
+		window.closeImages();
 		const currentState = decodeURIComponent(
 			new URL(document.URL).hash.replace('#', '')
 		).split('/');

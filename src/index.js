@@ -150,10 +150,20 @@ app.get('/skin/custom/:creator/:name', (req, res) => {
 	);
 });
 
-app.use(express.static('./dist'));
-app.use(express.static('./src/static'));
+app.use(
+	'/',
+	express.static('./src/client', {
+		root: process.cwd(),
+	})
+);
+app.use(
+	'/',
+	express.static('./src/static', {
+		root: process.cwd(),
+	})
+);
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 8080, () => {
 	console.log('Server listening');
 });
 

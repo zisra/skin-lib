@@ -1,3 +1,11 @@
 {
-	"order": ["Harp1", "Harp2", "Harp3", "Harp4", "Harp5", "Harp6", "Harp7"]
+	"order": [
+		"Harp_1",
+		"Harp_2",
+		"Harp_3",
+		"Harp_4",
+		"Harp_5",
+		"Harp_6",
+		"Harp_7"
+	]
 }

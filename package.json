@@ -1,5 +1,5 @@
 {
-	"name": "skin-repo",
+	"name": "skin-lib",
 	"version": "1.0.0",
 	"description": "Custom and current defly.io skins",
 	"source": "src/index.js",
