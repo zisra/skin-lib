@@ -2,13 +2,11 @@
 	"name": "skin-lib",
 	"version": "1.0.0",
 	"description": "Custom and current defly.io skins",
-	"source": "src/index.js",
-	"browserslist": "> 5%, last 2 versions, not dead",
 	"type": "module",
 	"scripts": {
 		"start": "node src/index.js",
-		"build-dev": "parcel watch src/client/index.html",
-		"build": "parcel build src/client/index.html"
+		"build:dev": "vite build src/client --watch",
+		"build": "vite build src/client"
 	},
 	"repository": {
 		"type": "git",
@@ -23,6 +21,7 @@
 	"dependencies": {
 		"archiver": "^5.3.1",
 		"express": "^4.18.2",
-		"parcel": "^2.8.2"
+		"pixi.js": "^7.2.4",
+		"vite": "^4.3.9"
 	}
 }

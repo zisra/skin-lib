@@ -152,7 +152,7 @@ app.get('/skin/custom/:creator/:name', (req, res) => {
 
 app.use(
 	'/',
-	express.static('./src/client', {
+	express.static('./src/client/dist', {
 		root: process.cwd(),
 	})
 );

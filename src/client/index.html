@@ -24,6 +24,10 @@
 		/>
 	</head>
 	<body>
+		<div
+			class="invisible settings-button"
+			onClick="showModal('settings')"
+		></div>
 		<div class="container loader">
 			<h1 class="text-center">Defly SkinLib</h1>
 			<div class="lds-dual-ring"></div>
@@ -60,20 +64,20 @@
 		</div>
 
 		<div class="container invisible" id="ingame-skin-set">
-			<h1 class="text-center" id="ingame-skin-set-title"><!-- Title -->></h1>
+			<h1 class="text-center" id="ingame-skin-set-title"><!-- Title --></h1>
 			<div id="ingame-skins">
 				<!-- In-game skins -->
 			</div>
 		</div>
 
 		<div class="container invisible" id="custom-creator">
-			<h1 class="text-center" id="custom-creator-title"><!-- Title -->></h1>
+			<h1 class="text-center" id="custom-creator-title"><!-- Title --></h1>
 			<div id="custom-sets"></div>
 			<div id="single-skins"></div>
 		</div>
 
 		<div class="container invisible" id="custom-set">
-			<h1 class="text-center" id="custom-set-title"><!-- Title -->></h1>
+			<h1 class="text-center" id="custom-set-title"><!-- Title --></h1>
 			<div id="custom-set-skins">
 				<!-- Custom set skins -->
 			</div>
@@ -82,7 +86,8 @@
 		<dialog onclick="this.close()" class="modal" id="modal">
 			<div onclick="event.stopPropagation()">
 				<div class="align-right">
-					<button class="close-button" onclick="closeImages()"></button>
+					<button class="modal-button invisible" id="download">Record</button>
+					<button class="modal-button" onclick="closeModal()">Close</button>
 				</div>
 				<div id="modal-content"></div>
 			</div>
