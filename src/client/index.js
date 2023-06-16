@@ -52,7 +52,6 @@ window.showModal = async (type, options) => {
 			background: BACKGROUND_COLOR,
 			hello: false,
 		});
-
 		modalContent.appendChild(app.view);
 
 		(async () => {
@@ -64,23 +63,21 @@ window.showModal = async (type, options) => {
 			downloadButton.classList.remove('invisible');
 
 			if (skin.images[skin.spec.base]) {
-				const baseTexture = await Texture.from(skin.images[skin.spec.base]);
+				const baseTexture = Texture.from(skin.images[skin.spec.base]);
 				const baseSprite = new Sprite(baseTexture);
 				baseSprite.width = SPRITE_SIZE;
 				baseSprite.height = SPRITE_SIZE;
 				baseSprite.tint = TINT;
-				baseSprite.zIndex = 1;
 				baseSprite.anchor.set(0.5);
 				baseSprite.position.set(RESOLUTION / 2, RESOLUTION / 2);
 				app.stage.addChild(baseSprite);
 			}
 
 			if (skin.images[skin.spec.notint]) {
-				const notintTexture = await Texture.from(skin.images[skin.spec.notint]);
+				const notintTexture = Texture.from(skin.images[skin.spec.notint]);
 				const notintSprite = new Sprite(notintTexture);
 				notintSprite.width = SPRITE_SIZE;
 				notintSprite.height = SPRITE_SIZE;
-				notintSprite.zIndex = 1;
 				notintSprite.anchor.set(0.5);
 				notintSprite.position.set(RESOLUTION / 2, RESOLUTION / 2);
 				app.stage.addChild(notintSprite);
@@ -117,9 +114,11 @@ window.showModal = async (type, options) => {
 						rotorSprite.tint = TINT;
 					}
 
-					rotorSprite.zIndex = rotor.layer;
-
-					app.stage.addChild(rotorSprite);
+					if (!rotor.layer && rotor.layer <= app.stage.children.length) {
+						app.stage.addChildAt(rotorSprite, rotor.layer);
+					} else {
+						app.stage.addChild(rotorSprite);
+					}
 
 					if (!rotor.noRotation && !ANIMATED) {
 						const rotationSpeedRad = DEG_TO_RAD * -rotor.speed;
