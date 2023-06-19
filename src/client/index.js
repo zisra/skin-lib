@@ -51,7 +51,10 @@ window.showModal = async (type, options) => {
 			backgroundAlpha: BACKGROUND_COLOR === 0xffffff ? 0 : 1,
 			background: BACKGROUND_COLOR,
 			hello: false,
+			resolution: 1,
+			
 		});
+		globalThis.__PIXI_APP__ = app;
 		modalContent.appendChild(app.view);
 
 		(async () => {
@@ -128,7 +131,6 @@ window.showModal = async (type, options) => {
 						});
 					}
 				});
-			app.stage.sortChildren();
 
 			downloadButton.innerText = 'Record';
 			downloadButton.onclick = () => {
