@@ -213,35 +213,6 @@ p {
 	transform: scale(1.2);
 }
 
-.settings-button {
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	border: none;
-	background-color: #3d5dff;
-	color: white;
-	text-decoration: none;
-	border-radius: 8px;
-	padding: 8px;
-	transition: 0.2s;
-	cursor: pointer;
-	height: 50px;
-	width: 50px;
-	align-items: center;
-	justify-content: center;
-	display: flex;
-	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-	z-index: 100;
-}
-
-.settings-button > svg {
-	height: 30px;
-}
-
-.settings-button:hover {
-	filter: brightness(120%);
-}
-
 .home-button,
 .home-button:visited {
 	color: #3d5dff;
