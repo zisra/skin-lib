@@ -24,10 +24,6 @@
 		/>
 	</head>
 	<body>
-		<div
-			class="invisible settings-button"
-			onClick="showModal('settings')"
-		></div>
 		<div class="container loader">
 			<h1 class="text-center">Defly SkinLib</h1>
 			<div class="lds-dual-ring"></div>
@@ -86,7 +82,29 @@
 		<dialog onclick="this.close()" class="modal" id="modal">
 			<div onclick="event.stopPropagation()">
 				<div class="align-right">
-					<button class="modal-button invisible" id="download">Record</button>
+					<span id="preview-buttons" class="invisible">
+						<select id="idle-select">
+							<option value="moving">Moving</option>
+							<option value="idle">Idle</option>
+						  </select>
+						<select id="color-select">
+							<option value="3d5dff">Blue</option>
+							<option value="4d4d4d">Gray</option>
+							<option value="fd3535">Red</option>
+							<option value="008037">Dark Green</option>
+							<option value="ff8a2a">Orange</option>
+							<option value="924bff">Purple</option>
+							<option value="55d5ff">Sky Blue</option>
+							<option value="18e21f">Light Green</option>
+							<option value="f659ff">Pink</option>
+							<option value="f7ff2a">Yellow</option>
+							<option value="ff5eae">Rose Pink</option>
+							<option value="93fe00">Lime Green</option>
+							<option value="00ffbb">Turquoise</option>
+						  </select>
+						<button class="modal-button" id="download-image">Image</button>
+						<button class="modal-button" id="skin-download">Record</button>
+					</span>
 					<button class="modal-button" onclick="closeModal()">Close</button>
 				</div>
 				<div id="modal-content"></div>

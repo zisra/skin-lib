@@ -1,13 +1,21 @@
 {
 	"order": [
+		"BladedGod",
 		"Combat",
 		"DarkGod",
+		"DivineDarkGod",
+		"DivineDeityGod",
+		"EliteAlien",
 		"EternalFlame",
+		"GhostlySpirit",
 		"GlitchedGod",
 		"GoldenDefault",
 		"GoldenKing",
+		"HeavenAndEarth",
 		"KingXGold",
 		"Legon",
-		"ProdigyV1"
+		"ProdigyV1",
+		"WarGod",
+		"WhiteGoddess"
 	]
 }
