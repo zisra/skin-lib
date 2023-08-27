@@ -15,7 +15,7 @@ function zipDirectory(sourceDir, outPath) {
 			.on('error', (err) => reject(err))
 			.pipe(stream);
 
-		stream.on('close', () => resolve());
+		stream.on('close', () => resolve(undefined));
 		archive.finalize();
 	});
 }
@@ -54,14 +54,24 @@ function getSkins() {
 		}
 		for (let set in setFiles) {
 			let skins = [];
-			const skinFiles = JSON.parse(
-				fs.readFileSync(
-					`./data/${creatorsFiles[creator]}/${setFiles[set]}/skins.json`,
-					'utf8'
-				)
-			);
+			let skinFiles = [];
 
-			skinFiles.order.forEach((skin) => {
+			try {
+				skinFiles = JSON.parse(
+					fs.readFileSync(
+						`./data/${creatorsFiles[creator]}/${setFiles[set]}/skins.json`,
+						'utf8'
+					)
+				).order;
+			} catch {
+				skinFiles = fs
+					.readdirSync(`./data/${creatorsFiles[creator]}/${setFiles[set]}`)
+					.filter((dir) => dir !== 'skins.json')
+					.map((skin) => skin.replace('.txt', ''))
+					.sort();
+			}
+
+			skinFiles.forEach((skin) => {
 				skins.push({
 					name: skin,
 				});
@@ -79,9 +89,11 @@ function getSkins() {
 	}
 
 	let inGame = [];
-	let inGameFiles = JSON.parse(fs.readFileSync('./data/[In-game]/skins.json'));
+	let inGameSkinSets = JSON.parse(
+		fs.readFileSync('./data/[In-game]/skinSets.json')
+	);
 
-	inGameFiles.order.forEach((category) => {
+	inGameSkinSets.order.forEach((category) => {
 		let inGameSkins = [];
 		const inGameSkinFiles = JSON.parse(
 			fs.readFileSync(`./data/[In-game]/${category}/skins.json`, 'utf8')
@@ -111,13 +123,20 @@ function getSkins() {
 }
 
 app.get('/allSkinsZip', (req, res) => {
-	res.sendFile('skins.zip', {
+	res.sendFile('./cache/skins.zip', {
 		root: process.cwd(),
 	});
 });
 
 app.get('/skins', (req, res) => {
-	res.json(getSkins());
+	let skins;
+	try {
+		skins = JSON.parse(fs.readFileSync('./cache/skins.json'));
+	} catch {
+		skins = getSkins();
+		fs.writeFileSync('./cache/skins.json', JSON.stringify(skins));
+	}
+	res.json(skins);
 });
 
 app.get('/skin/custom/:creator/:set/:name', (req, res) => {
@@ -168,5 +187,5 @@ app.listen(process.env.PORT || 8080, () => {
 });
 
 console.log('Starting to ZIP files');
-await zipDirectory('./data', './skins.zip');
+await zipDirectory('./data', './cache/skins.zip');
 console.log('File ZIP completed');
