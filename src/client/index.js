@@ -111,7 +111,7 @@ async function showSkinPreview(id, previewOptions) {
         rotorSprite.tint = TINT;
       }
 
-      if (!rotor.layer && rotor.layer <= app.stage.children.length) {
+      if (rotor.layer <= app.stage.children.length) {
         app.stage.addChildAt(rotorSprite, rotor.layer);
       } else {
         app.stage.addChild(rotorSprite);
@@ -222,30 +222,21 @@ window.onload = async () => {
 
   const builders = {
     skinElement: (skin) => {
-      return `<div class="skin-card ${skin.isFinal ? "highlight" : ""}"><h2>${
-        skin.name
-      }</h2>${
-        !isNaN(skin.price)
+      return `<div class="skin-card ${skin.isFinal ? "highlight" : ""}"><h2>${skin.name
+        }</h2>${!isNaN(skin.price)
           ? `<p class="skin-prize">Price: ${skin.price} <img class="inline-img" src="img/coin.png" /></p>`
           : `<p class="skin-prize">Price: ${skin.price}</p>`
-      }<a class="btn btn-block" href="skin/${skin.path}" download="skin${
-        skin.name
-      }.txt">Download</a><button onclick="showModal('images','${
-        skin.path
-      }')" class="btn btn-image btn-block">Images</button><button onclick="showModal('preview','${
-        skin.path
-      }')" class="btn btn-image btn-block">Preview</button></div>`;
+        }<a class="btn btn-block" href="skin/${skin.path}" download="skin${skin.name
+        }.txt">Download</a><button onclick="showModal('images','${skin.path
+        }')" class="btn btn-image btn-block">Images</button><button onclick="showModal('preview','${skin.path
+        }')" class="btn btn-image btn-block">Preview</button></div>`;
     },
     customSkinElement: (skin) => {
-      return `<div class="skin-card ${skin.isFinal ? "highlight" : ""}"><h2>${
-        skin.name
-      }</h2><a class="btn btn-block" href="skin/${skin.path}" download="${
-        skin.name
-      }.txt">Download</a><button onclick="showModal('images','${
-        skin.path
-      }')" class="btn btn-image btn-block">Images</button><button onclick="showModal('preview','${
-        skin.path
-      }')" class="btn btn-image btn-block">Preview</button></div>`;
+      return `<div class="skin-card ${skin.isFinal ? "highlight" : ""}"><h2>${skin.name
+        }</h2><a class="btn btn-block" href="skin/${skin.path}" download="${skin.name
+        }.txt">Download</a><button onclick="showModal('images','${skin.path
+        }')" class="btn btn-image btn-block">Images</button><button onclick="showModal('preview','${skin.path
+        }')" class="btn btn-image btn-block">Preview</button></div>`;
     },
     inGameSkinSetButton: (set) => {
       return `<a class="btn m-5" href="#inGameSkinSet/${set.name}" role="button" >${set.name}</a>`;
