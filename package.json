@@ -7,10 +7,10 @@
 		"start": "node src/index.js",
 		"build": "vite build src/client",
 		"build:dev": "vite dev src/client",
-		"tools:sortSkins": "node scripts/sortSkins.js",
 		"tools:getSkinImages": "node scripts/getSkinImages.js",
 		"tools:getSkinSpecs": "node scripts/getSkinSpecs.js",
-		"tools:createSkinFiles": "node scripts/createSkinFiles.js"
+		"tools:createSkinFiles": "node scripts/createSkinFiles.js",
+		"tools:sortSkins": "node scripts/sortSkins.js"
 	},
 	"repository": {
 		"type": "git",

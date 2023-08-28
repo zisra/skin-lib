@@ -1,5 +1,8 @@
 .DS_STORE
-package-lock.json
 node_modules
 .env
 dist
+skins.json
+
+cache/skins.zip
+cache/skins.json

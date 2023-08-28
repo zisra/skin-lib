@@ -3,7 +3,7 @@ import inGameSkinSets from '../data/[In-game]/skinSets.json' assert { type: 'jso
 
 inGameSkinSets.order.forEach(async (skinSet) => {
 	const skinSetDetails = JSON.parse(
-		fs.readFileSync(`../data/[In-game]/${skinSet}/skins.json`)
+		fs.readFileSync(`./data/[In-game]/${skinSet}/skins.json`)
 	);
 
 	skinSetDetails.order.forEach(async (skinSetDetail) => {

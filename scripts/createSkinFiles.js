@@ -9,7 +9,13 @@ const originalSkinData = JSON.parse(
 const skinData = JSON.parse(fs.readFileSync('./cache/allSkins.json', 'utf8'));
 
 function getSkin(skin) {
-    if (skin === 80) return; // skip skin 80, it was removed
+    if (skin === 80) {
+        fs.writeFileSync(
+            `./cache/raw_skins/skin80.txt`,
+            fs.readFileSync(`./cache/skin80.txt`)
+        );
+        return;
+    }
 
     const finalSkin = {};
     finalSkin.spec = skinData.specs[skin];
@@ -35,7 +41,7 @@ function getSkin(skin) {
     );
 }
 
-function getOGskin(skin) {
+function getOriginalSkin(skin) {
     const file = originalSkinData[skin];
     const final = {
         spec: {
@@ -51,10 +57,10 @@ function getOGskin(skin) {
     final.images[file.base] =
         'data:image/png;base64,' +
         fs.readFileSync(`./cache/raw_images/${file.base}.png`, 'base64');
-        
+
     final.spec.notint = file.notint;
     final.images[file.notint] =
-        'data:image/png;=base64,' +
+        'data:image/png;base64,' +
         fs.readFileSync(`./cache/raw_images/${file.notint}.png`, 'base64');
 
     file.rotors.forEach((i) => {
@@ -70,27 +76,13 @@ function getOGskin(skin) {
             layer: 1,
         });
     });
-
-    if (file.base) {
-        const base =
-            fs.readFileSync(`./cache/raw_images/${file.base}.png`, 'base64url') ?? '';
-        // file.images[file.base] = base;
-        final.images.base = file.base;
-    }
-
-    if (file.notint) {
-        const notint =
-            fs.readFileSync(`./cache/raw_images/${file.notint}.png`, 'base64url') ??
-            '';
-        // file.images[file.notint] = notint;
-        final.images.notint = file.notint;
-    }
     fs.writeFileSync(`./cache/raw_skins/skin${skin}.txt`, JSON.stringify(final));
 }
 
-Array.from({ length: MAX_SKINS }, (_, i) => i + 1).forEach((skin) => {
+Array.from({ length: 
+    MAX_SKINS }, (_, i) => i + 1).forEach((skin) => {
     if (skin <= 25) {
-        getOGskin(skin);
+        getOriginalSkin(skin);
     } else {
         getSkin(skin);
     }
