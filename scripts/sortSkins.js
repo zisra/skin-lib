@@ -1,17 +1,14 @@
 import fs from 'node:fs';
-import inGameSkinSets from '../data/[In-game]/skins.json' assert { type: 'json' };
+import inGameSkinSets from '../data/[In-game]/skinSets.json' assert { type: 'json' };
 
 inGameSkinSets.order.forEach(async (skinSet) => {
-	const skinSetDetails = await import(
-		`../data/[In-game]/${skinSet}/skins.json`,
-		{
-			assert: { type: 'json' },
-		}
-	).then((module) => module.default);
+	const skinSetDetails = JSON.parse(
+		fs.readFileSync(`../data/[In-game]/${skinSet}/skins.json`)
+	);
 
 	skinSetDetails.order.forEach(async (skinSetDetail) => {
 		const skin = fs.readFileSync(
-			`./raw_skins/skin${skinSetDetail}.txt`,
+			`./cache/raw_skins/skin${skinSetDetail}.txt`,
 			'utf8'
 		);
 
