@@ -55,14 +55,20 @@ function getSkins() {
 		for (let set in setFiles) {
 			let skins = [];
 			let skinFiles = [];
+			let color;
+			let textColor;
 
 			try {
-				skinFiles = JSON.parse(
+				const file = JSON.parse(
 					fs.readFileSync(
 						`./data/${creatorsFiles[creator]}/${setFiles[set]}/skins.json`,
 						'utf8'
 					)
-				).order;
+				);
+				skinFiles = file.order;
+				color = file.color;
+				textColor = file.textColor;
+
 			} catch {
 				skinFiles = fs
 					.readdirSync(`./data/${creatorsFiles[creator]}/${setFiles[set]}`)
@@ -78,7 +84,7 @@ function getSkins() {
 				totalSkins++;
 			});
 
-			sets.push({ name: setFiles[set], skins });
+			sets.push({ name: setFiles[set], skins, color, textColor });
 		}
 
 		creators.push({
@@ -129,13 +135,7 @@ app.get('/allSkinsZip', (req, res) => {
 });
 
 app.get('/skins', (req, res) => {
-	let skins;
-	try {
-		skins = JSON.parse(fs.readFileSync('./cache/skins.json'));
-	} catch {
-		skins = getSkins();
-		fs.writeFileSync('./cache/skins.json', JSON.stringify(skins));
-	}
+	let skins = JSON.parse(fs.readFileSync('./cache/skins.json'));
 	res.json(skins);
 });
 
@@ -182,10 +182,11 @@ app.use(
 	})
 );
 
+console.log('Starting setup');
+await zipDirectory('./data', './cache/skins.zip');
+fs.writeFileSync('./cache/skins.json', JSON.stringify(getSkins()));
+console.log('Setup complete');
+
 app.listen(process.env.PORT || 8080, () => {
 	console.log('Server listening');
 });
-
-console.log('Starting to ZIP files');
-await zipDirectory('./data', './cache/skins.zip');
-console.log('File ZIP completed');

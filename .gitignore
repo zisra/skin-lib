@@ -3,5 +3,5 @@ node_modules
 .env
 dist
 
-skins.json
-skins.zip
+cache/skins.json
+cache/skins.zip
