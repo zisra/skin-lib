@@ -213,6 +213,14 @@ p {
 	transform: scale(1.2);
 }
 
+.discord-invite {
+	transition: 0.2s;
+}
+
+.discord-invite:hover {
+	transform: scale(1.2);
+}
+
 .home-button,
 .home-button:visited {
 	color: #3d5dff;
