@@ -187,6 +187,8 @@ await zipDirectory('./data', './cache/skins.zip');
 fs.writeFileSync('./cache/skins.json', JSON.stringify(getSkins()));
 console.log('Setup complete');
 
-app.listen(process.env.PORT || 8080, () => {
-	console.log('Server listening');
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
+	console.log(`Server listening at http://localhost:${port}`);
 });
