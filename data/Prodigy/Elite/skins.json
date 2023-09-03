@@ -1,9 +1,10 @@
 {
     "color": "000000",
-    "textColor": "9D00FF",
+    "textColor": "e30000",
     "order": [
         "Celestrium",
         "DivineAlien",
-        "HolyAureate"
+        "HolyAureate", 
+        "SolsticeDeity"
     ]
 }
