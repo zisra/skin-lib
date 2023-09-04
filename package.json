@@ -1,37 +1,37 @@
 {
-	"name": "skin-lib",
-	"version": "1.0.0",
-	"description": "Custom and current defly.io skins",
-	"type": "module",
-	"scripts": {
-		"start": "node src/index.js",
-		"build": "vite build src/client",
-		"build:dev": "vite dev src/client",
-		"tools:getSkinImages": "node scripts/getSkinImages.js",
-		"tools:getSkinSpecs": "node scripts/getSkinSpecs.js",
-		"tools:createSkinFiles": "node scripts/createSkinFiles.js",
-		"tools:sortSkins": "node scripts/sortSkins.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/zisra/skin-repo.git"
-	},
-	"author": "Isra",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/zisra/skin-repo/issues"
-	},
-	"homepage": "https://github.com/zisra/skin-repo#readme",
-	"dependencies": {
-		"archiver": "^5.3.1",
-		"express": "^4.18.2",
-		"pixi.js": "^7.2.4",
-		"vite": "^4.3.9"
-	},
-	"devDependencies": {
-		"@types/archiver": "^5.3.2",
-		"@types/express": "^4.17.17",
-		"ofetch": "^1.3.3",
-		"sharp": "^0.32.5"
-	}
+  "name": "skin-lib",
+  "version": "1.0.0",
+  "description": "Custom and current defly.io skins",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "build": "vite build src/client",
+    "build:dev": "vite dev src/client",
+    "tools:getSkinImages": "node scripts/getSkinImages.js",
+    "tools:getSkinSpecs": "node scripts/getSkinSpecs.js",
+    "tools:createSkinFiles": "node scripts/createSkinFiles.js",
+    "tools:sortSkins": "node scripts/sortSkins.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zisra/skin-repo.git"
+  },
+  "author": "Isra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zisra/skin-lib/issues"
+  },
+  "homepage": "https://github.com/zisra/skin-lib#readme",
+  "dependencies": {
+    "archiver": "^5.3.1",
+    "express": "^4.18.2",
+    "pixi.js": "^7.2.4",
+    "vite": "^4.3.9"
+  },
+  "devDependencies": {
+    "@types/archiver": "^5.3.2",
+    "@types/express": "^4.17.17",
+    "ofetch": "^1.3.3",
+    "sharp": "^0.32.5"
+  }
 }
