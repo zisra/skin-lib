@@ -2,16 +2,16 @@
     "color": "fcba21",
     "textColor": "082C8C",
     "order": [
-        "6PathsLunarGod.txt",
-        "Akatsuki.txt",
-        "AntiSageGod.txt",
-        "DivineCelestus.txt",
-        "DivineSage.txt",
-        "MoonSage.txt",
-        "NarutoGod.txt",
-        "ParadigmGod.txt",
-        "SageObito.txt",
-        "SageOf6Paths.txt",
-        "SasukeGod.txt"
+        "6PathsLunarGod",
+        "Akatsuki",
+        "AntiSageGod",
+        "DivineCelestus",
+        "DivineSage",
+        "MoonSage",
+        "NarutoGod",
+        "ParadigmGod",
+        "SageObito",
+        "SageOf6Paths",
+        "SasukeGod"
     ]
 }
