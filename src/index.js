@@ -142,7 +142,7 @@ app.get('/skins', (req, res) => {
 app.get('/skin/custom/:creator/:set/:name', (req, res) => {
 	res.download(
 		`./data/${req.params.creator}/${req.params.set}/${req.params.name}.txt`,
-		`skin${req.params.name}.txt`,
+		`${req.params.name}.txt`,
 		{
 			root: process.cwd(),
 		}

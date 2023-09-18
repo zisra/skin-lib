@@ -243,7 +243,6 @@ window.onload = async () => {
 					: html`<p class="skin-prize">Price: ${skin.price}</p>`}<a
 					class="btn btn-block"
 					href="skin/${skin.path}"
-					download="skin${skin.name}.txt"
 					>Download</a
 				><button
 					onclick="showModal('images','${skin.path}')"
@@ -264,7 +263,6 @@ window.onload = async () => {
 				<a
 					class="btn btn-block"
 					href="skin/${skin.path}"
-					download="${skin.name}.txt"
 					>Download</a
 				><button
 					onclick="showModal('images','${skin.path}')"
