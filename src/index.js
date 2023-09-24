@@ -65,10 +65,17 @@ function getSkins() {
 						'utf8'
 					)
 				);
+				if (!file.order) {
+					skinFiles = fs
+						.readdirSync(`./data/${creatorsFiles[creator]}/${setFiles[set]}`)
+						.filter((dir) => dir !== 'skins.json')
+						.map((skin) => skin.replace('.txt', ''))
+						.sort();
+				}
+
 				skinFiles = file.order;
 				color = file.color;
 				textColor = file.textColor;
-
 			} catch {
 				skinFiles = fs
 					.readdirSync(`./data/${creatorsFiles[creator]}/${setFiles[set]}`)
