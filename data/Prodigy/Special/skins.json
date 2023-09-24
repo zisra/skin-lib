@@ -1,28 +1,5 @@
 {
 	"color": "00ffff",
 	"textColor": "000000",
-	"order": [
-		"BladedGod",
-		"Combat",
-		"DarkGod",
-		"DivineDarkGod",
-		"EliteAlien",
-		"EternalFlame",
-		"Exotion",
-		"GhostlySpirit",
-		"GlitchedGod",
-		"GoldenDefault",
-		"GoldenKing",
-		"HeavenAndEarth",
-		"HolyGhost",
-		"KingXGold",
-		"Legon",
-		"LiquidMatter",
-		"LoneSamurai",
-		"ProdigyV1",
-		"S2Remake",
-		"SplitColorGod",
-		"WarGod",
-		"WhiteGoddess"
-	]
+	"order": false
 }

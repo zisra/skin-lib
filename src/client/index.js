@@ -260,10 +260,7 @@ window.onload = async () => {
 		customSkinElement: (skin) => {
 			return html`<div class="skin-card ${skin.isFinal ? 'highlight' : ''}">
 				<h2>${skin.name}</h2>
-				<a
-					class="btn btn-block"
-					href="skin/${skin.path}"
-					>Download</a
+				<a class="btn btn-block" href="skin/${skin.path}">Download</a
 				><button
 					onclick="showModal('images','${skin.path}')"
 					class="btn btn-image btn-block"
@@ -324,7 +321,7 @@ window.onload = async () => {
 				.filter((set) => !set.inGame)
 				.map((set) => builders.inGameSkinSetButton(set))
 				.join('');
-			downloadButton.innerHTML = `Download all ${skins.totalSkins} skins (ZIP)`;
+			downloadButton.innerHTML = `Download all skins (ZIP)`;
 		},
 		creator: (state) => {
 			customCreatorTitle.innerHTML = html`<a class="home-button" href="#"

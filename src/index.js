@@ -25,7 +25,6 @@ function filterDotFiles(array) {
 }
 
 function getSkins() {
-	let totalSkins = 0;
 	let creators = [];
 	let creatorsFiles = filterDotFiles(
 		fs.readdirSync('./data').filter((dir) => dir !== '[In-game]')
@@ -49,7 +48,6 @@ function getSkins() {
 				singleSkins.push({
 					name: singleSkinFiles[singleSkin].replace('.txt', ''),
 				});
-				totalSkins++;
 			}
 		}
 		for (let set in setFiles) {
@@ -71,9 +69,10 @@ function getSkins() {
 						.filter((dir) => dir !== 'skins.json')
 						.map((skin) => skin.replace('.txt', ''))
 						.sort();
+				} else {
+					skinFiles = file.order;
 				}
 
-				skinFiles = file.order;
 				color = file.color;
 				textColor = file.textColor;
 			} catch {
@@ -88,7 +87,6 @@ function getSkins() {
 				skins.push({
 					name: skin,
 				});
-				totalSkins++;
 			});
 
 			sets.push({ name: setFiles[set], skins, color, textColor });
@@ -118,7 +116,6 @@ function getSkins() {
 				isFinal: inGameSkinFiles.final === skin,
 				price: inGameSkinFiles.prices[inGameSkinFiles.order.indexOf(skin)],
 			});
-			totalSkins++;
 		});
 
 		inGame.push({
@@ -129,7 +126,6 @@ function getSkins() {
 	});
 
 	return {
-		totalSkins,
 		custom: creators,
 		inGame,
 	};
