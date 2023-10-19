@@ -1,12 +1,13 @@
 {
-    "color": "000000",
-    "textColor": "e30000",
-    "order": [
-        "Celestrium",
-        "DivineAlien",
-        "EternalSpectr",
-        "HolyPryze",
-        "SolsticeDeity",
-        "ValarionAurum"
-    ]
+	"color": "000000",
+	"textColor": "e30000",
+	"order": [
+		"Celestrium",
+		"DivineAlien",
+		"EternalSpectr",
+		"HolyPryze",
+		"LiquidMatter",
+		"SolsticeDeity",
+		"ValarionAurum"
+	]
 }
