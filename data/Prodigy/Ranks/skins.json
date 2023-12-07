@@ -1,0 +1,15 @@
+{
+	"color": "00ffff",
+	"textColor": "000000",
+	"order": [
+		"Bronze",
+		"Silver",
+		"Gold",
+		"Platinum",
+		"Diamond",
+		"Champion",
+		"Grandmaster",
+		"Legend",
+		"God"
+	]
+}
