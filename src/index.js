@@ -2,6 +2,7 @@ import fs from 'node:fs';
 
 import express from 'express';
 import archiver from 'archiver';
+import cors from 'cors';
 
 const app = express();
 
@@ -130,6 +131,8 @@ function getSkins() {
 		inGame,
 	};
 }
+
+app.use(cors());
 
 app.get('/allSkinsZip', (req, res) => {
 	res.sendFile('./cache/skins.zip', {
