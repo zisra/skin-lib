@@ -53,6 +53,7 @@ async function showSkinPreview(id, previewOptions) {
 	const SPRITE_SIZE = previewOptions?.size || 256;
 	const IDLE = previewOptions?.idle === true;
 	const ANIMATED = previewOptions?.animated === false;
+
 	const RECORDING_BPS = previewOptions?.bitsPerSecond || 4500000;
 	const RECORDING_LENGTH = previewOptions?.recordingLength || 5000;
 
