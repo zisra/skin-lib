@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import inGameSkinSets from '../data/[In-game]/skinSets.json' assert { type: 'json' };
+import inGameSkinSets from '../data/[In-game]/skinSets.json' with { type: "json" };
 
 inGameSkinSets.order.forEach(async (skinSet) => {
 	const skinSetDetails = JSON.parse(
