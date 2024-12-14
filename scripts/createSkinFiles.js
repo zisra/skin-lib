@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-const MAX_SKINS = 138;
+const MAX_SKINS = 139;
 
 const originalSkinData = JSON.parse(
 	fs.readFileSync('./cache/originalSkins.json', 'utf8')
