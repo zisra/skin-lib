@@ -16,9 +16,9 @@ window.showModal = async (type, options) => {
 	if (type === 'images') {
 		const data = await fetch(`skin/${options}`);
 		const skin = await data.json();
-		let skinImages = [];
+		const skinImages = [];
 
-		for (let image in skin.images) {
+		for (const image in skin.images) {
 			skinImages.push(
 				html`<a href="${skin.images[image]}" download="${image}"
 					><img
@@ -31,14 +31,18 @@ window.showModal = async (type, options) => {
 		}
 		modalContent.innerHTML = skinImages.join('');
 	} else if (type === 'preview') {
+		if (app) app.destroy(true, { children: true });
 		showSkinPreview(options, {
 			color: colorSelect.value,
 			idle: idleSelect.value === 'idle',
-			// animated: localStorage.getItem('animated') === 'false',
 		});
 	}
 	modal.showModal();
 };
+
+let app = null;
+let skin = null;
+let savedSkinId = null;
 
 async function showSkinPreview(id, previewOptions) {
 	const modalContent = document.querySelector('#modal-content');
@@ -46,6 +50,7 @@ async function showSkinPreview(id, previewOptions) {
 	const idleSelect = document.querySelector('#idle-select');
 	const skinDownloadButton = document.querySelector('#skin-download');
 	const skinImageDownloadButton = document.querySelector('#download-image');
+	const freezeImageButton = document.querySelector('#freeze-image');
 	const previewButtons = document.querySelector('#preview-buttons');
 
 	const TINT = previewOptions?.color ?? '3d5dff';
@@ -60,18 +65,23 @@ async function showSkinPreview(id, previewOptions) {
 
 	previewButtons.classList.remove('invisible');
 
-	const app = new Application({
+	app = new Application({
 		width: RESOLUTION,
 		height: RESOLUTION,
 		backgroundAlpha: BACKGROUND_COLOR === 0xffffff ? 0 : 1,
 		background: BACKGROUND_COLOR,
 		hello: false,
 		resolution: 1,
+		antialias: true,
 	});
 
 	modalContent.appendChild(app.view);
-	const data = await fetch(`skin/${id}`);
-	const skin = await data.json();
+
+	if (!skin || savedSkinId !== id) {
+		const data = await fetch(`skin/${id}`);
+		skin = await data.json();
+		savedSkinId = id;
+	}
 
 	if (skin.images[skin.spec.base]) {
 		const baseTexture = Texture.from(skin.images[skin.spec.base]);
@@ -154,7 +164,7 @@ async function showSkinPreview(id, previewOptions) {
 			recorder.stop();
 			skinDownloadButton.disabled = false;
 			skinDownloadButton.innerText = 'Download';
-		}, RECORDING_LENGTH);
+		}, parseInt(prompt('How many seconds should the recording be? No response = 4secs')) * 1000 || RECORDING_LENGTH);
 
 		skinDownloadButton.onclick = () => {
 			recorder.save(`skin_${id}.webm`);
@@ -162,9 +172,7 @@ async function showSkinPreview(id, previewOptions) {
 	};
 
 	colorSelect.onchange = () => {
-		document.querySelectorAll('canvas').forEach((el) => {
-			el.remove();
-		});
+		app.destroy(true, { children: true });
 
 		showSkinPreview(id, {
 			color: colorSelect.value,
@@ -172,9 +180,7 @@ async function showSkinPreview(id, previewOptions) {
 		});
 	};
 	idleSelect.onchange = () => {
-		document.querySelectorAll('canvas').forEach((el) => {
-			el.remove();
-		});
+		app.destroy(true, { children: true });
 
 		showSkinPreview(id, {
 			color: colorSelect.value,
@@ -189,6 +195,16 @@ async function showSkinPreview(id, previewOptions) {
 			link.download = `skin_${id}.png`;
 			link.href = canvas.toDataURL('image/png');
 			link.click();
+		});
+	};
+
+	freezeImageButton.onclick = () => {
+		app.destroy(true, { children: true });
+
+		showSkinPreview(id, {
+			color: colorSelect.value,
+			idle: idleSelect.value === 'idle',
+			animated: false,
 		});
 	};
 }
@@ -239,7 +255,7 @@ window.onload = async () => {
 		skinElement: (skin) => {
 			return html`<div class="skin-card ${skin.isFinal ? 'highlight' : ''}">
 				<h2>${skin.name}</h2>
-				${!isNaN(skin.price)
+				${!Number.isNaN(skin.price)
 					? html`<p class="skin-prize">
 							Price: ${skin.price} <img class="inline-img" src="img/coin.png" />
 					  </p>`
