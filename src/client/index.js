@@ -1,4 +1,4 @@
-import { Application, Texture, Sprite, DEG_TO_RAD } from 'pixi.js';
+import { Application, DEG_TO_RAD, Sprite, Texture } from 'pixi.js';
 import { CanvasRecorder } from './canvasRecorder.js';
 
 const html = (strings, ...values) =>
@@ -34,6 +34,7 @@ window.showModal = async (type, options) => {
 		showSkinPreview(options, {
 			color: colorSelect.value,
 			idle: idleSelect.value === 'idle',
+			// animated: localStorage.getItem('animated') === 'false',
 		});
 	}
 	modal.showModal();
@@ -131,7 +132,7 @@ async function showSkinPreview(id, previewOptions) {
 			}
 
 			if (!rotor.noRotation && !ANIMATED) {
-				const rotationSpeedRad = DEG_TO_RAD * -rotor.speed;
+				const rotationSpeedRad = (DEG_TO_RAD * -rotor.speed) / 1.1;
 
 				app.ticker.add(() => {
 					rotorSprite.rotation += rotationSpeedRad;
@@ -182,12 +183,13 @@ async function showSkinPreview(id, previewOptions) {
 	};
 
 	skinImageDownloadButton.onclick = () => {
-		const canvas = document.querySelector('canvas');
-		const image = canvas.toDataURL();
-		const imageLink = document.createElement('a');
-		imageLink.download = `skin_${id}.png`;
-		imageLink.href = image;
-		imageLink.click();
+		const canvas = app.view;
+		requestAnimationFrame(() => {
+			const link = document.createElement('a');
+			link.download = `skin_${id}.png`;
+			link.href = canvas.toDataURL('image/png');
+			link.click();
+		});
 	};
 }
 
@@ -330,12 +332,13 @@ window.onload = async () => {
 				>
 				${state[1]}`;
 			if (
-				skins.custom.find((creator) => creator.name == state[1]).skinSets.length
+				skins.custom.find((creator) => creator.name === state[1]).skinSets
+					.length
 			) {
 				customSets.innerHTML =
 					'<div class="card buttons">' +
 					skins.custom
-						.find((creator) => creator.name == state[1])
+						.find((creator) => creator.name === state[1])
 						.skinSets.map((skin) => builders.customSet(skin, state))
 						.join('') +
 					'</div>';
@@ -343,11 +346,11 @@ window.onload = async () => {
 				customSets.innerHTML = '';
 			}
 			if (
-				skins.custom.find((creator) => creator.name == state[1]).singleSkins
+				skins.custom.find((creator) => creator.name === state[1]).singleSkins
 					.length
 			) {
 				singleSkins.innerHTML = skins.custom
-					.find((creator) => creator.name == state[1])
+					.find((creator) => creator.name === state[1])
 					.singleSkins.map((skin) =>
 						builders.customSkinElement({
 							...skin,
@@ -365,7 +368,7 @@ window.onload = async () => {
 				>
 				${state[1]}`;
 			inGameSkins.innerHTML = skins.inGame
-				.find((set) => set.name == state[1])
+				.find((set) => set.name === state[1])
 				.skins.map((skin) =>
 					builders.skinElement({
 						...skin,
@@ -377,8 +380,8 @@ window.onload = async () => {
 		customSet: (state) => {
 			customSetTitle.innerHTML = builders.customSetTitle(state);
 			customSetSkins.innerHTML = skins.custom
-				.find((creator) => creator.name == state[1])
-				.skinSets.find((set) => set.name == state[2])
+				.find((creator) => creator.name === state[1])
+				.skinSets.find((set) => set.name === state[2])
 				.skins.map((skin) =>
 					builders.customSkinElement({
 						...skin,

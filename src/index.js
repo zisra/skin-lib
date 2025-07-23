@@ -1,8 +1,7 @@
 import fs from 'node:fs';
-
-import express from 'express';
 import archiver from 'archiver';
 import cors from 'cors';
+import express from 'express';
 
 const app = express();
 
@@ -26,33 +25,33 @@ function filterDotFiles(array) {
 }
 
 function getSkins() {
-	let creators = [];
-	let creatorsFiles = filterDotFiles(
+	const creators = [];
+	const creatorsFiles = filterDotFiles(
 		fs.readdirSync('./data').filter((dir) => dir !== '[In-game]')
 	);
 
-	for (let creator in creatorsFiles) {
-		let sets = [];
+	for (const creator in creatorsFiles) {
+		const sets = [];
 		const setFiles = filterDotFiles(
 			fs
 				.readdirSync(`./data/${creatorsFiles[creator]}`)
 				.filter((dir) => dir !== '[Single]')
 		);
 
-		let singleSkins = [];
+		const singleSkins = [];
 
 		if (fs.existsSync(`./data/${creatorsFiles[creator]}/[Single]`)) {
 			const singleSkinFiles = filterDotFiles(
 				fs.readdirSync(`./data/${creatorsFiles[creator]}/[Single]`)
 			);
-			for (let singleSkin in singleSkinFiles) {
+			for (const singleSkin in singleSkinFiles) {
 				singleSkins.push({
 					name: singleSkinFiles[singleSkin].replace('.txt', ''),
 				});
 			}
 		}
-		for (let set in setFiles) {
-			let skins = [];
+		for (const set in setFiles) {
+			const skins = [];
 			let skinFiles = [];
 			let color;
 			let textColor;
@@ -100,13 +99,13 @@ function getSkins() {
 		});
 	}
 
-	let inGame = [];
-	let inGameSkinSets = JSON.parse(
+	const inGame = [];
+	const inGameSkinSets = JSON.parse(
 		fs.readFileSync('./data/[In-game]/skinSets.json')
 	);
 
 	inGameSkinSets.order.forEach((category) => {
-		let inGameSkins = [];
+		const inGameSkins = [];
 		const inGameSkinFiles = JSON.parse(
 			fs.readFileSync(`./data/[In-game]/${category}/skins.json`, 'utf8')
 		);
@@ -134,14 +133,14 @@ function getSkins() {
 
 app.use(cors());
 
-app.get('/allSkinsZip', (req, res) => {
+app.get('/allSkinsZip', (_req, res) => {
 	res.sendFile('./cache/skins.zip', {
 		root: process.cwd(),
 	});
 });
 
-app.get('/skins', (req, res) => {
-	let skins = JSON.parse(fs.readFileSync('./cache/skins.json'));
+app.get('/skins', (_req, res) => {
+	const skins = JSON.parse(fs.readFileSync('./cache/skins.json'));
 	res.json(skins);
 });
 

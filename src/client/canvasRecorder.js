@@ -12,7 +12,7 @@ export function CanvasRecorder(canvas, video_bits_per_sec) {
 	var mediaRecorder = null;
 
 	var stream = canvas.captureStream();
-	if (typeof stream == undefined || !stream) {
+	if (!stream) {
 		return;
 	}
 
@@ -20,7 +20,7 @@ export function CanvasRecorder(canvas, video_bits_per_sec) {
 	video.style.display = 'none';
 
 	function startRecording() {
-		let types = [
+		const types = [
 			'video/webm',
 			'video/webm,codecs=vp9',
 			'video/vp8',
@@ -30,7 +30,7 @@ export function CanvasRecorder(canvas, video_bits_per_sec) {
 			'video/mpeg',
 		];
 
-		for (let i in types) {
+		for (const i in types) {
 			if (MediaRecorder.isTypeSupported(types[i])) {
 				supportedType = types[i];
 				break;
@@ -39,7 +39,7 @@ export function CanvasRecorder(canvas, video_bits_per_sec) {
 		if (supportedType == null) {
 			console.log('No supported type found for MediaRecorder');
 		}
-		let options = {
+		const options = {
 			mimeType: supportedType,
 			videoBitsPerSecond: video_bits_per_sec || 2500000, // 2.5Mbps
 		};
