@@ -142,7 +142,7 @@ async function showSkinPreview(id, previewOptions) {
 			}
 
 			if (!rotor.noRotation && !ANIMATED) {
-				const rotationSpeedRad = (DEG_TO_RAD * -rotor.speed) / 1.1;
+				const rotationSpeedRad = DEG_TO_RAD * -rotor.speed;
 
 				app.ticker.add(() => {
 					rotorSprite.rotation += rotationSpeedRad;
